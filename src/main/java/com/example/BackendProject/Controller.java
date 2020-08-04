@@ -1,8 +1,8 @@
 package com.example.BackendProject;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class Controller {
@@ -29,4 +29,17 @@ public class Controller {
         return db.searchAWord(q);
     }
 
+    //get api to return all users
+    //http://localhost:8080/getUsers
+    @GetMapping("/getUsers")
+    public List<User> getUsers() {
+        return db.getUserList();
+    }
+
+    //post api for adding a new user in database
+    //query to be provided in the form of JSON
+    @PostMapping("/addUser")
+    public boolean createUser(@RequestBody User user) {
+        return db.addUser(user);
+    }
 }
